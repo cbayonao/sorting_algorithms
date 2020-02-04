@@ -4,39 +4,40 @@
  *@list: listint_t type, is the list for sort
  *
  */
+
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *sorted = NULL;
-	listint_t *tmp1 = NULL;
-	listint_t *tmp2 = NULL;
-	listint_t *tmp3 = NULL;
-	listint_t *current = *list;
+	listint_t *head = NULL, *temp = NULL;
 
-	while (current)
+	head = *list;
+
+	while (head != NULL)
 	{
-		if (current->prev && current->n > current->prev->n)
+		temp = head;
+
+		while (temp->prev != NULL && temp->n < temp->prev->n)
 		{
-			tmp1 = current->prev->prev;
-			tmp2 = current->prev;
-			tmp3 = current;
-			sorted = current->next;
-			tmp2->next = sorted;
-			if (sorted)
-				sorted->prev = tmp2;
-			tmp3->next = tmp2;
-			tmp3->prev = tmp1;
-			if (tmp1)
+			temp->prev->next = temp->next;
+			if (temp->next != NULL)
 			{
-				tmp1->next = tmp3;
+				temp->next->prev = temp->prev;
+			}
+			temp->next = temp->prev;
+			temp->prev = temp->prev->prev;
+			temp->next->prev = temp;
+
+			if (temp->prev == NULL)
+			{
+				*list = temp;
 			}
 			else
-				*list = tmp3;
-			tmp2->prev = tmp3;
-			current = *list;
+			{
+				temp->prev->next = temp;
+			}
 			print_list(*list);
-			continue;
+
 		}
-		else
-			current = current->next;
+		head = head->next;
 	}
+
 }
