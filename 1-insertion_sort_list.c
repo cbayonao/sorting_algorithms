@@ -2,7 +2,7 @@
 /**
  * insertion_sort_list - function for insertion_sort_list
  *@list: listint_t type, is the list for sort
- * insertion_sort_list
+ *
  */
 void insertion_sort_list(listint_t **list)
 {
