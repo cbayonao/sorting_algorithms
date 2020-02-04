@@ -1,33 +1,45 @@
 #include "sort.h"
-/**
- * swap - function to swap
- *@a: int
- *@b: int
- * swap
- */
-void swap(int *a, int *b)
-{
-	int temp = *a;
-	*a = *b;
-	*b = temp;
-}
+
 /**
  * selection_sort - function to sort by selection
  *@array: integer
  *@size: type size_t
  *
  */
-void selection_sort(int *array, size_t size)
+
+void insertion_sort_list(listint_t **list)
 {
-	for (unsigned int step = 0; step < size - 1; step++)
+	listint_t *head = NULL, *temp = NULL;
+
+	head = *list;
+
+	while (head != NULL)
 	{
-		int min_idx = step;
-		for (unsigned int i = step + 1; i < size; i++)
+		temp = head;
+
+		while (temp->prev != NULL && temp->n < temp->prev->n)
 		{
-			if (array[i] < array[min_idx])
-				min_idx = i;
+			temp->prev->next = temp->next;
+			if (temp->next != NULL)
+			{
+				temp->next->prev = temp->prev;
+			}
+			temp->next = temp->prev;
+			temp->prev = temp->prev->prev;
+			temp->next->prev = temp;
+
+			if (temp->prev == NULL)
+			{
+				*list = temp;
+			}
+			else
+			{
+				temp->prev->next = temp;
+			}
+			print_list(*list);
+
 		}
-		swap(&array[min_idx], &array[step]);
-		print_array(array, size);
+		head = head->next;
 	}
+
 }
