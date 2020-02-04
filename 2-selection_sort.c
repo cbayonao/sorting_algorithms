@@ -7,39 +7,33 @@
  *
  */
 
-void insertion_sort_list(listint_t **list)
+void selection_sort(int *array, size_t size)
 {
-	listint_t *head = NULL, *temp = NULL;
+        unsigned int i, k;
+        int temp = 0, pos = 0;
 
-	head = *list;
+        if (array == NULL || size == 0)
+                return;
 
-	while (head != NULL)
-	{
-		temp = head;
+        for (i = 0; i < (size - 1); i++)
+        {
+                pos = i;
 
-		while (temp->prev != NULL && temp->n < temp->prev->n)
-		{
-			temp->prev->next = temp->next;
-			if (temp->next != NULL)
-			{
-				temp->next->prev = temp->prev;
-			}
-			temp->next = temp->prev;
-			temp->prev = temp->prev->prev;
-			temp->next->prev = temp;
+                for (k = i + 1; k < size; k++)
+                {
+                        if (array[k] < array[pos])
+                        {
+                                pos = k;
+                        }
+                }
 
-			if (temp->prev == NULL)
-			{
-				*list = temp;
-			}
-			else
-			{
-				temp->prev->next = temp;
-			}
-			print_list(*list);
+                if (array[pos] == array[i])
+                        continue;
 
-		}
-		head = head->next;
-	}
+                temp = array[pos];
+                array[pos] = array[i];
+                array[i] = temp;
+                print_array(array, size);
+        }
 
 }
