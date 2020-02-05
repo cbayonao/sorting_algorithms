@@ -3,6 +3,8 @@
  * swap - Function to do the swaps
  *@a: integer
  *@b: integer
+ *@array: integer
+ *@size: size_t
  */
 
 void swap(int *a, int *b, int *array, size_t size)
@@ -20,6 +22,7 @@ void swap(int *a, int *b, int *array, size_t size)
  *@array: integer
  *@low: integer
  *@high: integer
+ *@size: size_t.
  * Return: Always
  */
 int partition(int *array, int low, int high, size_t size)
