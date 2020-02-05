@@ -5,11 +5,15 @@
  *@b: integer
  */
 
-void swap(int *a, int *b)
+void swap(int *a, int *b, int *array, size_t size)
 {
-	int t = *a;
-	*a = *b;
-	*b = t;
+	if (*a != *b)
+	{
+		int t = *a;
+		*a = *b;
+		*b = t;
+		print_array(array, size);
+	}
 }
 /**
  * partition - function to do partition
@@ -18,20 +22,21 @@ void swap(int *a, int *b)
  *@high: integer
  * Return: Always
  */
-int partition(int array, int low, int high)
+int partition(int *array, int low, int high, size_t size)
 {
 	int pivot = array[high];
 	int i = (low - 1);
+	int j;
 
 	for (j = low; j < high; j++)
 	{
 		if (array[j] <= pivot)
 		{
 			i++;
-			swap(&array[i], &array[j]);
+			swap(&array[i], &array[j], array, size);
 		}
 	}
-	swap(&array[i + 1], &array[high]);
+	swap(&array[i + 1], &array[high], array, size);
 	return (i + 1);
 }
 /**
@@ -44,22 +49,22 @@ void quick_sort(int *array, size_t size)
 	int low = 0;
 	int high = size - 1;
 
-	recursive = (array, size, low, high)
+	sort_recursive(array, size, low, high);
 }
 /**
- * recursive - function recursive
+ * sort_recursive - function recursive
  *@array: integer.
  *@size: integer.
  *@low: integer.
  *@high: integer.
  */
-void recursive(int *array, size_t size, int low, int high)
+void sort_recursive(int *array, size_t size, int low, int high)
 {
 	if (low < high)
 	{
-		int pivot = partition(array, low, high);
+		int pivot = partition(array, low, high, size);
 
-		recursive(array, size, low, pivot - 1);
-		recursive(array, size, pi + 1, high);
+		sort_recursive(array, size, low, pivot - 1);
+		sort_recursive(array, size, pivot + 1, high);
 	}
 }
