@@ -23,6 +23,7 @@ void swap(int *a, int *b, int *array, size_t size)
  *@low: integer
  *@high: integer
  *@size: size_t.
+ * par
  * Return: Always
  */
 int partition(int *array, int low, int high, size_t size)
